@@ -41,41 +41,6 @@ io.on('connection', (socket) => {
 		io.to(toId).emit('signal', socket.id, message)
 	})
 
-	// socket.on('postMessageEvent', (data) => {
-	// 	if (connections) for (let a = 0; a < connections.length; ++a) {
-	// 		io.to(connections[a]).emit("newMessageEvent", data)
-	// 	}
-	// })
-
-	// socket.on('disconnect', () => {
-	// 	var diffTime = Math.abs(timeOnline[socket.id] - new Date())
-	// 	var key
-
-	// 	for (const [k, v] of JSON.parse(JSON.stringify(Object.entries(connections)))) {
-	// 		for (let a = 0; a < v.length; ++a) {
-	// 			if (v[a] === socket.id) {
-	// 				key = k
-
-	// 				for (let a = 0; a < connections[key].length; ++a) {
-	// 					io.to(connections[key][a]).emit("user-left", socket.id)
-	// 				}
-
-	// 				var index = connections[key].indexOf(socket.id)
-	// 				connections[key].splice(index, 1)
-
-	// 				console.log(key, socket.id, Math.ceil(diffTime / 1000))
-
-	// 				if (connections[key].length === 0) {
-	// 					delete connections[key]
-	// 					delete names[key]
-	// 					delete gamedata[key]
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// })
-
-	
 	socket.on('disconnect', () => {
 		var diffTime = Math.abs(timeOnline[socket.id] - new Date())
 
@@ -100,6 +65,6 @@ io.on('connection', (socket) => {
 	})
 })
 
-server.listen(5001, () => {
-	console.log("listening on", 5001)
+server.listen(process.env.PORT || 5001, () => {
+	console.log("Server Running...")
 })
